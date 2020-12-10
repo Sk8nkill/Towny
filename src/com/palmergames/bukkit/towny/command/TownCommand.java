@@ -2354,9 +2354,6 @@ public class TownCommand extends BaseCommand implements CommandExecutor, TabComp
 		}
 
 		try {
-			if (TownyAPI.getInstance().isWarTime())
-				throw new TownyException(Translation.of("msg_war_cannot_do"));
-
 			if (TownySettings.hasTownLimit() && townyUniverse.getDataSource().getTowns().size() >= TownySettings.getTownLimit())
 				throw new TownyException(Translation.of("msg_err_universe_limit"));
 
@@ -2527,10 +2524,6 @@ public class TownCommand extends BaseCommand implements CommandExecutor, TabComp
 	public void townLeave(Player player) {
 
 		try {
-			// TODO: Allow leaving town during war.
-			if (TownyAPI.getInstance().isWarTime())
-				throw new TownyException(Translation.of("msg_war_cannot_do"));
-
 			Resident resident = getResidentOrThrow(player.getUniqueId());
 			
 			if (!resident.hasTown())
@@ -3296,9 +3289,6 @@ public class TownCommand extends BaseCommand implements CommandExecutor, TabComp
 				
 				if (!world.isClaimable())
 					throw new TownyException(Translation.of("msg_not_claimable"));
-
-				if (TownyAPI.getInstance().isWarTime())
-					throw new TownyException(Translation.of("msg_war_cannot_do"));
 
 				List<WorldCoord> selection;
 				boolean outpost = false;
